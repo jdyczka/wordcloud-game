@@ -1,15 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import styled from "styled-components";
 import { GameSet } from "../declarations";
 
 interface GameProps {
-    gameData: GameSet
+    gameData: GameSet;
+    onFinishGame(points: number): void;
 }
 
-export default function Game({gameData}: GameProps) {
+export default function Game({gameData, onFinishGame}: GameProps) {
 
     const [isFinished, setIsFinished] = useState(false);
     const [chosenWords, setChosenWords] = useState(new Set());
+    
+    let points = useRef<number>(0);
 
     const toggleAnswer = (word: string) => {
       const newChosenWords = new Set(chosenWords);
@@ -21,8 +24,8 @@ export default function Game({gameData}: GameProps) {
       setChosenWords(newChosenWords);
     }
   
-    const checkAnswers = () => {
-  
+    const checkResults = () => {
+        
     }
 
     if (isFinished) {
@@ -31,15 +34,22 @@ export default function Game({gameData}: GameProps) {
                 <div className="question">{gameData.question}</div>
                 <Words>
                     {
-                        gameData.all_words.map(word => <ResultWord
-                            as='div'
-                            key={word}
-                            isChosen={chosenWords.has(word)}
-                            isCorrect={gameData.good_words.includes(word)}
-                        >{word}</ResultWord>)
+                        gameData.all_words.map(word => {
+                            const isChosen = chosenWords.has(word);
+                            const isCorrect = gameData.good_words.includes(word);
+                            let pointsToAdd = isChosen 
+                                ? isCorrect ? 2 : -1
+                                : isCorrect ? -1 : 0;
+                            points.current += pointsToAdd;
+                            return <ResultWord
+                                as='div'
+                                key={word}
+                                isChosen={isChosen}
+                                isCorrect={isCorrect}
+                            >{word}</ResultWord>})
                     }
                 </Words>
-                <button onClick={() => setIsFinished(true)}>finish game</button>
+                <button onClick={() => onFinishGame(points.current)}>finish game</button>
             </div>
         )
     }
