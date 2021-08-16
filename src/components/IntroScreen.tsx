@@ -18,7 +18,7 @@ export default function IntroScreen({ onNameSubmit }: IntroScreenProps) {
                 placeholder="Enter your nickname here..."
                 value={name}
                 onChange={ev => setName(ev.target.value)} />
-            <Button onClick={() => { onNameSubmit(name) }}>play</Button>
+            <Button disabled={!name} onClick={() => { onNameSubmit(name) }}>play</Button>
         </Wrapper>
     )
 }

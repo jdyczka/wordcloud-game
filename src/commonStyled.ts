@@ -16,6 +16,11 @@ const Button = styled.button`
     &:focus, &:hover {
         background: ${colorPrimary}33;
     }
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
 `;
 
 interface HeadingProps {
