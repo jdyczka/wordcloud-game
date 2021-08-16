@@ -1,4 +1,6 @@
 import React from "react";
+import styled from 'styled-components';
+import { Button, Heading } from "../commonStyled";
 
 interface ResultsScreenProps {
     name: string;
@@ -9,11 +11,17 @@ interface ResultsScreenProps {
 export default function ResultsScreen({name, points, onNewGame}: ResultsScreenProps) {
 
     return (
-        <div>
-            <div>Congratulations, {name}</div>
-            <div>Your score:</div>
-            <div>{points} points</div>
-            <button onClick={onNewGame}>New game</button>
-        </div>
+        <Wrapper>
+            <Heading>Congratulations, {name || 'stranger'}</Heading>
+            <Heading>Your score:</Heading>
+            <Heading color='primary'>{points} points</Heading>
+            <Button onClick={onNewGame}>New game</Button>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+    ${Heading}[color] {
+        margin: 10px 0 20px;
+    }
+`;

@@ -1,79 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import './App.css';
 import Game from './components/Game';
 import IntroScreen from './components/IntroScreen';
 import ResultsScreen from './components/ResultsScreen';
-
-
 import { GameSet } from './declarations';
-
-const gameSets: GameSet[] = [
-  {
-    question: "select animals",
-    all_words: [
-      "hole",
-      "sofa",
-      "pear",
-      "tiger",
-      "oatmeal",
-      "square",
-      "nut",
-      "cub",
-      "shirt",
-      "tub",
-      "passenger",
-      "cow"
-    ],
-    good_words: [
-      "tiger",
-      "cow",
-    ]
-  },
-  {
-    question: "select colors",
-    all_words: [
-      "jeans",
-      "existence",
-      "ink",
-      "red",
-      "blue",
-      "yellow",
-      "laugh",
-      "behavior",
-      "expansion",
-      "white",
-      "black",
-      "cakes"
-    ],
-    good_words: [
-      "red",
-      "blue",
-      "yellow",
-      "white",
-      "black"
-    ]
-  },
-  {
-    question: "select vehicles",
-    all_words: [
-      "belief",
-      "wire",
-      "car",
-      "bus",
-      "star",
-      "river",
-      "hat",
-      "skirt",
-      "train",
-    ],
-    good_words: [
-      "car",
-      "bus",
-      "train"
-    ]
-  }
-];
+import gameSets from './apiData';
 
 type GameStatus = 'intro' | 'game' | 'results';
 
@@ -123,7 +54,6 @@ function App() {
 export default App;
 
 const Wrapper = styled.div`
-  box-sizing: border-box;
   min-height: 100vh;
   display: flex;
   justify-content: center;
